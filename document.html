@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アクセシビリティテストアプリケーション仕様書</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container my-5">
+    <h1 class="text-center mb-4">アクセシビリティテストアプリケーション仕様書</h1>
+
+    <h2>1. 概要</h2>
+    <p>
+      本アプリケーションは、アクセシビリティに関するテストを実施するためのWebアプリケーションです。ユーザーはCSVファイルから問題を読み込み、選択式のクイズ形式で回答します。結果は即時フィードバックされ、最終結果はExcel形式でダウンロード可能です。
+    </p>
+
+    <h2>2. 機能要件</h2>
+    <h3>2.1 問題表示</h3>
+    <ul>
+      <li>CSVファイルから問題を読み込み、選択式のクイズを表示。</li>
+      <li>各質問に対して以下を表示:
+        <ul>
+          <li>問題文（例: 「1. 問題文」）。</li>
+          <li>4つの選択肢。</li>
+          <li>回答送信ボタン。</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>2.2 回答処理</h3>
+    <ul>
+      <li>ユーザーが選択した回答を記録。</li>
+      <li>回答が正解か不正解かを即時フィードバック。</li>
+      <li>次の問題に進むための「次の問題」ボタンを表示。</li>
+    </ul>
+
+    <h3>2.3 テスト結果</h3>
+    <ul>
+      <li>各質問の正誤状況を表形式で表示。</li>
+      <li>合計得点を計算し、画面上部に表示（フォントサイズ24px）。</li>
+    </ul>
+
+    <h3>2.4 Excelダウンロード</h3>
+    <ul>
+      <li>テスト結果をExcelファイル（.xlsx形式）としてダウンロード可能。</li>
+    </ul>
+
+    <h2>3. 非機能要件</h2>
+    <h3>3.1 デザイン</h3>
+    <ul>
+      <li>モバイルおよびデスクトップの両方に対応（レスポンシブデザイン）。</li>
+      <li><strong>Bootstrap</strong>フレームワークを利用。</li>
+      <li>カード型レイアウトで視覚的に整えたデザイン。</li>
+    </ul>
+
+    <h3>3.2 アクセシビリティ</h3>
+    <ul>
+      <li>問題番号を明記し、進行状況をユーザーに明示。</li>
+      <li>視覚的なフィードバック（例: 「正解です！」はアニメーション表示）。</li>
+    </ul>
+
+    <h3>3.3 技術要件</h3>
+    <ul>
+      <li>HTML5、CSS3（Bootstrapを含む）。</li>
+      <li>JavaScript（ES6+）。</li>
+      <li>CSVパースには<strong>PapaParse</strong>ライブラリを使用。</li>
+      <li>Excel生成には<strong>SheetJS</strong>ライブラリを使用。</li>
+    </ul>
+
+    <h2>4. 動作環境</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>要件</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ブラウザ</td>
+          <td>最新のGoogle Chrome、Firefox、Edge</td>
+        </tr>
+        <tr>
+          <td>サーバ環境</td>
+          <td>必要なし（スタンドアロンで動作可能）</td>
+        </tr>
+        <tr>
+          <td>OS</td>
+          <td>Windows, macOS, Linux</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>5. ファイル構成</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ファイル名</th>
+          <th>説明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>index.html</td>
+          <td>メインHTMLファイル</td>
+        </tr>
+        <tr>
+          <td>style.css</td>
+          <td>カスタムCSSファイル</td>
+        </tr>
+        <tr>
+          <td>script.js</td>
+          <td>メインJavaScriptファイル</td>
+        </tr>
+        <tr>
+          <td>qa.csv</td>
+          <td>テスト問題が記載されたCSVファイル</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>6. 機能フロー</h2>
+    <ol>
+      <li><strong>CSVファイルの読み込み:</strong> アプリ起動時に<code>qa.csv</code>を読み込み、問題データを解析。</li>
+      <li><strong>スタート画面の表示:</strong> 「テストを開始」ボタンを中央に表示。</li>
+      <li><strong>クイズ実施:</strong>
+        <ul>
+          <li>問題文と選択肢を表示。</li>
+          <li>ユーザーが回答を選択し、送信ボタンで回答を確定。</li>
+          <li>フィードバックを表示し、次の問題へ進む。</li>
+        </ul>
+      </li>
+      <li><strong>結果表示:</strong>
+        <ul>
+          <li>全問題終了後、得点を表示（フォントサイズ24px）。</li>
+          <li>表形式で正誤結果を表示。</li>
+        </ul>
+      </li>
+      <li><strong>Excelダウンロード:</strong> 「結果をExcelでダウンロード」ボタンで結果をダウンロード可能。</li>
+    </ol>
+
+    <h2>7. 拡張予定</h2>
+    <ul>
+      <li>問題カテゴリのフィルタリング機能。</li>
+      <li>ユーザーの進行状況を保存し、再開できる機能。</li>
+      <li>タイマー機能の追加。</li>
+    </ul>
+  </div>
+</body>
+</html>
