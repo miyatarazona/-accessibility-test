@@ -112,12 +112,12 @@ function handleNext() {
 // 結果表示
 function displayResults() {
   const correctAnswers = userAnswers.filter((answer, index) => answer === questions[index].correctAnswer).length;
-  const totalPoints = (100 / questions.length) * correctAnswers;
+  const totalPoints = Math.round((100 / questions.length) * correctAnswers);
 
   appContainer.innerHTML = `
     <div class="card shadow-sm p-4" style="width: 1000px;">
       <h2 class="text-center mb-4">テスト結果</h2>
-      <p class="text-center mb-4" style="font-size: 24px;"><strong>あなたの点数: ${totalPoints.toFixed(1)}点 / 100点</strong></p>
+      <p class="text-center mb-4" style="font-size: 24px;"><strong>あなたの点数: ${totalPoints}点 / 100点</strong></p>
       <table class="table table-striped">
         <thead>
           <tr>
