@@ -142,6 +142,7 @@ function displayResults() {
       </table>
       <div class="text-center mt-4">
         <button class="btn btn-success" onclick="downloadExcel()">結果をExcelでダウンロード</button>
+        <button class="btn btn-info" onclick="window.open('https://gamma.app/docs/20241128-k17stcspmveco96', '_blank')">回答解説資料をダウンロード</button>
       </div>
     </div>
   `;
